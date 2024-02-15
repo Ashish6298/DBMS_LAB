@@ -1,0 +1,198 @@
+SQL> CREATE TABLE EMPLOYEE(
+  2  EID INT PRIMARY KEY,
+  3  NAME VARCHAR2(20),
+  4  ADDRESS VARCHAR2(20),
+  5  GENDER CHAR(1) CHECK(GENDER='M' OR GENDER='F'),
+  6  SALARY NUMBER(6),
+  7  SUPEREID REFERENCES EMPLOYEE(EID),
+  8  DNO NUMBER);
+
+Table created.
+
+SQL> 
+SQL> INSERT INTO EMPLOYEE VALUES(1,'RAHUL','MANGALURU','M',35000,1,NULL);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(2,'SAHANA','MANGALURU','F',35000,1,NULL);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(3,'SAGAR','BENGALURU','M',35000,1,NULL);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(4,'SAGARIK','MANGALURU','M',35000,1,NULL);
+
+1 row created.
+
+SQL> INSERT INTO EMPLOYEE VALUES(5,'SAJAAN','MYSORE','M',600000,1,NULL);
+
+1 row created.
+
+
+SQL> SET PAGESIZE 200 LINESIZE 3000;
+SQL> SELECT * FROM EMPLOYEE;
+
+       EID NAME                 ADDRESS              G     SALARY   SUPEREID        DNO
+---------- -------------------- -------------------- - ---------- ---------- ----------
+         1 RAHUL                MANGALURU            M      35000          1
+         2 SAHANA               MANGALURU            F      35000          1
+         3 SAGAR                BENGALURU            M      35000          1
+         4 SAGARIK              MANGALURU            M      35000          1
+         5 SAJAAN               MYSORE               M     600000          1
+
+SQL> CREATE TABLE DEPARTMENT(
+  2  DNUM NUMBER(5) PRIMARY KEY,
+  3  DNAME VARCHAR2(10),
+  4  DMGR_ID REFERENCES EMPLOYEE(EID),
+  5  MGR_START_DATE DATE);
+
+Table created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(1,'CSE',1,'2-NOV-2007');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(2,'IOT',2,'2-NOV-2007');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(3,'ACCOUNT',2,'2-NOV-2017');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(4,'ISE',1,'2-NOV-2000');
+
+1 row created.
+
+SQL> INSERT INTO DEPARTMENT VALUES(5,'FINANCE',1,'3-NOV-2001');
+
+1 row created.
+
+SQL> SELECT * FROM DEPARTMENT;
+
+      DNUM DNAME         DMGR_ID MGR_START
+---------- ---------- ---------- ---------
+         1 CSE                 1 02-NOV-07
+         2 IOT                 2 02-NOV-07
+         3 ACCOUNT             2 02-NOV-17
+         4 ISE                 1 02-NOV-00
+         5 FINANCE             1 03-NOV-01
+
+SQL> ALTER TABLE EMPLOYEE ADD CONSTRAINT FK FOREIGN KEY(DNO) REFERENCES DEPARTMENT(DNUM);
+
+Table altered.
+
+SQL> UPDATE EMPLOYEE SET DNO=4 WHERE EID=1;
+
+1 row updated.
+
+SQL> UPDATE EMPLOYEE SET DNO=1 WHERE EID=2;
+
+1 row updated.
+
+SQL> UPDATE EMPLOYEE SET DNO=3 WHERE EID=3;
+
+1 row updated.
+
+SQL> UPDATE EMPLOYEE SET DNO=3 WHERE EID=4;
+
+1 row updated.
+
+SQL> UPDATE EMPLOYEE SET DNO=3 WHERE EID=5;
+
+1 row updated.
+
+
+SQL> SELECT * FROM EMPLOYEE;
+
+       EID NAME                 ADDRESS              G     SALARY   SUPEREID        DNO
+---------- -------------------- -------------------- - ---------- ---------- ----------
+         1 RAHUL                MANGALURU            M      35000          1          4
+         2 SAHANA               MANGALURU            F      35000          1          1
+         3 SAGAR                BENGALURU            M      35000          1          3
+         4 SAGARIK              MANGALURU            M      35000          1          3
+         5 SAJAAN               MYSORE               M     600000          1          3
+
+SQL> CREATE TABLE DLOCATION(
+  2  DNO REFERENCES DEPARTMENT(DNUM),
+  3  LOCATION VARCHAR2(10),
+  4  PRIMARY KEY(DNO,LOCATION));
+
+Table created.
+
+SQL> INSERT INTO DLOCATION VALUES(1,'MANGALURU');
+
+1 row created.
+
+SQL> INSERT INTO DLOCATION VALUES(1,'MYSORE');
+
+1 row created.
+
+SQL> INSERT INTO DLOCATION VALUES(2,'MANGALURU');
+
+1 row created.
+
+SQL> INSERT INTO DLOCATION VALUES(3,'BENGALURU');
+
+1 row created.
+
+SQL> INSERT INTO DLOCATION VALUES(4,'MANGALURU');
+
+1 row created.
+
+SQL> INSERT INTO DLOCATION VALUES(5,'MANGALURU');
+
+1 row created.
+
+SQL>  SELECT * FROM DLOCATION;
+
+       DNO LOCATION
+---------- ----------
+         1 MANGALURU
+         1 MYSORE
+         2 MANGALURU
+         3 BENGALURU
+         4 MANGALURU
+         5 MANGALURU
+
+6 rows selected.
+
+SQL> CREATE TABLE PROJECT(
+  2  PNUM NUMBER(2) PRIMARY KEY,
+  3  PNAME VARCHAR2(20),
+  4  PLOCATION VARCHAR2(20),
+  5  DNO NUMBER REFERENCES DEPARTMENT(DNUM));
+
+Table created.
+
+SQL> INSERT INTO PROJECT VALUES(1,'IOT','MANGALURU',1);
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES(2,'DATA MINING','MANGALURU',1);
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES(3,'CC','HUBLI',3);
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES(4,'IMAGE PROCESSING','MANGALURU',4);
+
+1 row created.
+
+SQL> INSERT INTO PROJECT VALUES(5,'RESEARCH','MANGALURU',5);
+
+1 row created.
+
+SQL> SELECT * FROM PROJECT;
+
+      PNUM PNAME                PLOCATION                   DNO
+---------- -------------------- -------------------- ----------
+         1 IOT                  MANGALURU                     1
+         2 DATA MINING          MANGALURU                     1
+         3 CC                   HUBLI                         3
+         4 IMAGE PROCESSING     MANGALURU                     4
+         5 RESEARCH             MANGALURU                     5
