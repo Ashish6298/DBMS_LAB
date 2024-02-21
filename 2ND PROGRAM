@@ -196,3 +196,91 @@ SQL> SELECT * FROM PROJECT;
          3 CC                   HUBLI                         3
          4 IMAGE PROCESSING     MANGALURU                     4
          5 RESEARCH             MANGALURU                     5
+
+----------------------------------------------------------------------------------------------------------------------
+
+QUERY 1:-
+SELECT PNO FROM WORKSON WHERE EID IN
+(SELECT EID FROM EMPLOYEE WHERE NAME='RAHUL')
+UNION SELECT PNUM FROM PROJECT WHERE DNO IN
+(SELECT DNUM FROM DEPARTMENT WHERE DMGR_ID IN
+(SELECT EID FROM EMPLOYEE WHERE NAME ='RAHUL'));
+
+O/P
+  PNO
+-----
+    1
+    2
+    4
+    5
+
+---------------------------------------------------------------------------
+
+QUERY 2:-
+SELECT EID,NAME,SALARY,SALARY+0.1*SALARY AS UPDATED_SALARY
+FROM EMPLOYEE
+WHERE EID IN 
+(SELECT EID FROM WORKSON WHERE PNO IN(
+SELECT PNUM FROM PROJECT WHERE PNAME='IOT'));
+
+O/P
+
+       EID NAME                     SALARY UPDATED_SALARY
+---------- -------------------- ---------- --------------
+         1 RAHUL                     35000          38500
+         2 SAHANA                    35000          38500
+
+---------------------------------------------------------------------------
+
+QUERY 3:-
+SELECT SUM(SALARY),AVG(SALARY),MAX(SALARY),MIN(SALARY)
+FROM EMPLOYEE E, DEPARTMENT D
+WHERE D.Dnum=E.Dno AND Dname='ACCOUNT';
+
+O/P
+SUM(SALARY) AVG(SALARY) MAX(SALARY) MIN(SALARY)
+----------- ----------- ----------- -----------
+     130000  43333.3333       60000       35000
+
+
+-----------------------------------------------------------------------------
+
+QUERY 4:-
+
+SELECT Eid ,NAME FROM EMPLOYEE E WHERE NOT EXISTS(
+(SELECT PNUM FROM PROJECT WHERE Dno=5) MINUS
+(SELECT Pno FROM WORKSON W WHERE W.Eid=E.Eid));
+
+O/P
+       EID NAME
+---------- --------------------
+         5 SAJAAN
+------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 5:-
+
+CREATE VIEW DEPTINFO (NAME,COUNT_EMP,SUM_SAL)AS
+SELECT D.DNAME, COUNT(*),SUM(SALARY)
+FROM DEPARTMENT D INNER JOIN EMPLOYEE E
+ON E.DNO = D.DNUM
+GROUP BY D.DNAME;
+
+SELECT * FROM DEPTINFO;
+
+O/P
+
+
+NAME        COUNT_EMP    SUM_SAL
+---------- ---------- ----------
+ISE                 1      35000
+ACCOUNT             3     130000
+CSE                 1      35000
+
+-----------------------------------------------------------------------------------------------------------------------
+
+
+
+
+
+
+
