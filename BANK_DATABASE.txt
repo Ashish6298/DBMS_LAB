@@ -107,7 +107,7 @@ DESC LOAN;
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 1:-
+QUERY 1:- Find all the customers who have at least one account at the “Mangaluru” branch.
 
 SELECT C.CUSTOMER_ID,C.CUSTOMER_NAME FROM CUSTOMER C,ACCOUNT A,BRANCH B
 WHERE B.BRANCH_NAME='MANGALURU'AND B.BRANCH_ID=A.BRANCH_ID 
@@ -127,7 +127,7 @@ C1         RAVI
 
 -------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 2:-
+QUERY 2:- Find all the customers who have an account at all the branches located in a specific city.
 
 SELECT C.CUSTOMER_ID,C.CUSTOMER_NAME,A.ACCOUNT_BALANCE FROM 
 CUSTOMER C,ACCOUNT A
@@ -148,7 +148,7 @@ C1         RAVI                           10000
 
 ----------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 3:-
+QUERY 3:- Retrieve the Customer name and loan amount of a customer who borrowed a loan more than 5,00,000.
 
 SELECT C.CUSTOMER_NAME C,L.AMOUNT FROM CUSTOMER C,LOAN L 
 WHERE C.CUSTOMER_ID=L.CUSTOMER_ID AND AMOUNT>500000;
@@ -163,7 +163,7 @@ RAVI                     955000
 
 -----------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 4:-
+QUERY 4:- Retrieve the details of bank branch with maximum and minimum assets among the various branches.
 
 SELECT BANK_NAME,BRANCH_NAME,ASSETS FROM BRANCH 
 WHERE ASSETS=(SELECT MAX(ASSETS)FROM BRANCH)
@@ -182,7 +182,7 @@ CANARA          MANGALURU              60000000
 
 ---------------------------------------------------------------------------------------------------------------------------------------
 
-QUERY 5:-
+QUERY 5:- Demonstrate how you delete all account tuples at every branch located in a specific city.
 
 DELETE FROM BRANCH WHERE BRANCH_NAME='DELHI';
 
