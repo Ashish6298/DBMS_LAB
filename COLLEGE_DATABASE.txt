@@ -14,7 +14,19 @@ INSERT INTO STUDENT VALUES('4SF20CS088','KAVYA','MANGALORE',876514067,'FEMALE');
 
 
 SELECT * FROM STUDENT;
+
+
+USN                  SNAME      ADRESS          PHONE GENDER
+-------------------- ---------- ---------- ---------- ----------
+4SF20CS089           AJAY       MANGALORE      733825 MALE
+4SF20IS109           VARSHINI   BANTWAL        896523 FEMALE
+4SF20CS098           NAVISH     UDUPI         9956258 MALE
+4SF20CD001           SAHANA     SURATHKAL     8752683 FEMALE
+4SF20CS088           KAVYA      MANGALORE    78965231 FEMALE
+
+
 -------------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE SEMSEC (
 SSID NUMBER(5), 
 SEM NUMBER(2),
@@ -30,7 +42,18 @@ INSERT INTO SEMSEC VALUES(6,5,'A');
 
 SELECT * FROM SEMSEC;
 
+ 
+      SSID        SEM S
+---------- ---------- -
+         1          4 A
+         2          4 C
+         3          8 A
+         4          8 B
+         5          8 C
+         6          5 A
+
 ----------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE CLASS (
 SSID NUMBER(5),
 USN VARCHAR2(20), 
@@ -46,7 +69,17 @@ INSERT INTO CLASS VALUES(5,'4SF20CS098');
 
 
 SELECT * FROM CLASS;
+
+      SSID USN
+---------- --------------------
+         1 4SF20CD001
+         2 4SF20CS088
+         3 4SF20CS089
+         4 4SF20IS109
+         5 4SF20CS098
+
 -------------------------------------------------------------------------------------------------------------
+
 CREATE TABLE SUBJECT (
 SUBCODE VARCHAR2(7) PRIMARY KEY, 
 TITLE VARCHAR2(20), 
@@ -61,7 +94,17 @@ INSERT INTO SUBJECT VALUES('20CS34','DCN',5,3);
 INSERT INTO SUBJECT VALUES('20CS35','AIML',8,4);
 
 SELECT * FROM SUBJECT
-------------------------------------------------------------------------------------------------------------
+
+SUBCODE    TITLE                       SEM     CREDIT
+---------- -------------------- ---------- ----------
+20CS31     DATA STRUCTURE                4          4
+20CS32     UNIX                          4          3
+20CS33     DBMS                          5          4
+20CS34     DCN                           5          3
+20CS35     AIML                          8          4
+
+------------------------------------------------------------------------------------------------------------\
+
 CREATE TABLE IAMARKS(
 USN VARCHAR2(20),
 SUBCODE VARCHAR2(7),
@@ -85,6 +128,8 @@ INSERT INTO IAMARKS VALUES('4SF20IS109','20CS35',5,28,26,29,0);
 
 
 SELECT * FROM IAMARKS;
+
+
 --------------------------------------------------------------------------------------------------------
 EMPLOYEE(REMAINING):-
 
