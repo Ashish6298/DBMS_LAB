@@ -68,3 +68,88 @@ INSERT INTO LOAN VALUES('L4','B2',565000,'C4');
 INSERT INTO LOAN VALUES('L5','B4',955000,'C5');
 INSERT INTO LOAN VALUES('L6','B5',20000,'C2');
 --------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 1:-
+
+SELECT C.CUSTOMER_ID,C.CUSTOMER_NAME FROM CUSTOMER C,ACCOUNT A,BRANCH B
+WHERE B.BRANCH_NAME='MANGALURU'AND B.BRANCH_ID=A.BRANCH_ID 
+AND A.CUSTOMER_ID=C.CUSTOMER_ID;
+
+O/P
+
+CUSTOMER_I CUSTOMER_NAME
+---------- --------------------
+C1         RAVI
+C1         RAVI
+C1         RAVI
+C1         RAVI
+C1         RAVI
+C1         RAVI
+C1         RAVI
+
+-------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 2:-
+
+SELECT C.CUSTOMER_ID,C.CUSTOMER_NAME,A.ACCOUNT_BALANCE FROM 
+CUSTOMER C,ACCOUNT A
+WHERE C.CUSTOMER_ID=A.CUSTOMER_ID AND 
+ACCOUNT_BALANCE=(SELECT MAX(ACCOUNT_BALANCE)FROM ACCOUNT);
+
+O/P
+
+CUSTOMER_I CUSTOMER_NAME        ACCOUNT_BALANCE
+---------- -------------------- ---------------
+C1         RAVI                           10000
+C1         RAVI                           10000
+C1         RAVI                           10000
+C1         RAVI                           10000
+C1         RAVI                           10000
+C1         RAVI                           10000
+C1         RAVI                           10000
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 3:-
+
+SELECT C.CUSTOMER_NAME C,L.AMOUNT FROM CUSTOMER C,LOAN L 
+WHERE C.CUSTOMER_ID=L.CUSTOMER_ID AND AMOUNT>500000;
+
+O/P
+
+
+C                        AMOUNT
+-------------------- ----------
+RAVI                     565000
+RAVI                     955000
+
+-----------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 4:-
+
+SELECT BANK_NAME,BRANCH_NAME,ASSETS FROM BRANCH 
+WHERE ASSETS=(SELECT MAX(ASSETS)FROM BRANCH)
+UNION 
+SELECT BANK_NAME,BRANCH_NAME,ASSETS FROM BRANCH  
+WHERE ASSETS=(SELECT MIN(ASSETS)FROM BRANCH);
+
+O/P
+
+
+BANK_NAME       BRANCH_NAME              ASSETS
+--------------- -------------------- ----------
+CANARA         MANGALURU              60000000
+BANK OF BARODA  MANGALURU              70000000
+CANARA          MANGALURU              60000000
+
+---------------------------------------------------------------------------------------------------------------------------------------
+
+QUERY 5:-
+
+DELETE FROM BRANCH WHERE BRANCH_NAME='DELHI';
+
+O/P
+
+0 rows deleted.
+
+--------------------------------------------------------------------------------------------------------------------------------------
