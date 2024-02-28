@@ -139,3 +139,68 @@ O/P
 
 --------------------------------------------------------------------------------------------------------
 
+QUERY 3:-
+
+
+CREATE VIEW INTERNAL2 AS SELECT
+USN,S,SUBCODE,TITLE1,TESTI FROM SUBJECT S,
+IAMARKS I WHERE I.SUBCODE=S.SUBCODE
+AND I.USN='4SF21IS015';
+
+OR
+
+CREATE VIEW TEST_MARKS 
+AS SELECT SUBCODE ,TESTI FROM IAMARKS 
+WHERE USN='4SF20CD001';
+
+O/P
+
+SUBCODE      TESTI
+------- ----------
+20CS31          38
+20CS32          28
+
+--------------------------------------------------------------------------------------------------------------------
+
+QUERY 4:-
+
+UPDATE IAMARKS SET 
+FINALIA=(TESTI+TEST2+TEST3)/3;
+
+O/P
+
+
+USN                  SUBCODE       SSID      TESTI      TEST2      TEST3    FINALIA
+-------------------- ------- ---------- ---------- ---------- ---------- ----------
+4SF20CD001           20CS31           1         38         35         32         35
+4SF20CD001           20CS32           1         28         26         29         28
+4SF20CS088           20CS31           2         38         42         32         37
+4SF20CS089           20CS33           3         42         42         41         42
+4SF20CS098           20CS34           4         48         46         50         48
+4SF20IS109           20CS35           5         28         26         29         28
+
+---------------------------------------------------------------------------------------------------------------------
+
+QUERY 5:-
+
+SELECT USN,FINALIA, 
+     CASE 
+    WHEN FINALIA BETWEEN 45 AND 50 THEN 'OUTSTANDING' 
+    WHEN FINALIA BETWEEN 40 AND 45 THEN 'GOOD' 
+    WHEN FINALIA BETWEEN 30 AND 40 THEN 'AVERAGE' 
+    WHEN FINALIA <30  THEN 'WEAK'  
+    END
+     AS CATEGORY FROM IAMARKS I,
+      SEMSEC S WHERE I.SSID=S.SSID 
+      AND SEM=8 AND SECTION IN('A','B','C');
+
+O/P
+
+USN                     FINALIA CATEGORY
+-------------------- ---------- -----------
+4SF20CS089                   42 GOOD
+4SF20CS098                   48 outstanding
+4SF20IS109                   28 weak
+-----------------------------------------------------------------------------------------------------------------------------
+
+
