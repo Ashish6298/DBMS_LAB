@@ -13,13 +13,14 @@ INSERT INTO BRANCH VALUES('B5',' CANARA','MANGALURU',60000000);
 
 DESC BRANCH;
 
+ Name                                                                                                              Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ BRANCH_ID                                                                                                         NOT NULL VARCHAR2(10)
+ BANK_NAME                                                                                                                  VARCHAR2(15)
+ BRANCH_NAME                                                                                                                VARCHAR2(20)
+ ASSETS                                                                                                            NOT NULL NUMBER(38)
 
-
-
-
-
-
-
+---------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE CUSTOMER(
 CUSTOMER_ID VARCHAR(10),
@@ -28,6 +29,13 @@ CUSTOMER_AGE INT,
 CUSTOMER_ADDRESS VARCHAR(20),
 CUSTOMER_PHONE INT,
 PRIMARY KEY(CUSTOMER_ID));
+
+INSERT INTO CUSTOMER VALUES('C1','RAVI',22,'MANGALURU',8745263);
+INSERT INTO CUSTOMER VALUES('C2','RAVI',22,'MANGALURU',8745263);
+INSERT INTO CUSTOMER VALUES('C3','RAVI',22,'MANGALURU',8745263);
+INSERT INTO CUSTOMER VALUES('C4','RAVI',22,'MANGALURU',8745263);
+INSERT INTO CUSTOMER VALUES('C5','RAVI',22,'MANGALURU',8745263);
+--------------------------------------------------------------------------------------------------------------------------------------
 
 
 CREATE TABLE ACCOUNT(
@@ -40,6 +48,15 @@ PRIMARY KEY(ACC_NO),
 FOREIGN KEY (BRANCH_ID) REFERENCES BRANCH(BRANCH_ID) ON DELETE CASCADE,
 FOREIGN KEY(CUSTOMER_ID) REFERENCES CUSTOMER(CUSTOMER_ID) ON DELETE CASCADE );
 
+INSERT INTO ACCOUNT VALUES(123,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(456,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(789,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(1122,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(1334,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(1234,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(5876,'B1','SAVINGS',10000,'C1');
+
+--------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE LOAN(
 LOAN_NUMBER VARCHAR2(5),
@@ -51,26 +68,10 @@ FOREIGN KEY (BRANCH_ID) REFERENCES BRANCH(BRANCH_ID) ON DELETE CASCADE,
 FOREIGN KEY(CUSTOMER_ID) REFERENCES CUSTOMER(CUSTOMER_ID) ON DELETE CASCADE);
 
 
-
-INSERT INTO CUSTOMER VALUES('C1','RAVI',22,'MANGALURU',8745263);
-INSERT INTO CUSTOMER VALUES('C2','RAVI',22,'MANGALURU',8745263);
-INSERT INTO CUSTOMER VALUES('C3','RAVI',22,'MANGALURU',8745263);
-INSERT INTO CUSTOMER VALUES('C4','RAVI',22,'MANGALURU',8745263);
-INSERT INTO CUSTOMER VALUES('C5','RAVI',22,'MANGALURU',8745263);
-
-
-INSERT INTO ACCOUNT VALUES(123,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(456,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(789,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1122,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1334,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1234,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(5876,'B1','SAVINGS',10000,'C1');
-
-
 INSERT INTO LOAN VALUES('L1','B1',500000,'C1');
 INSERT INTO LOAN VALUES('L2','B2',50000,'C');
 INSERT INTO LOAN VALUES('L3','B3',40000,'C3');
 INSERT INTO LOAN VALUES('L4','B2',565000,'C4');
 INSERT INTO LOAN VALUES('L5','B4',955000,'C5');
 INSERT INTO LOAN VALUES('L6','B5',20000,'C2');
+--------------------------------------------------------------------------------------------------------------------------------------
