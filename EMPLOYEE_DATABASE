@@ -199,6 +199,55 @@ SQL> SELECT * FROM PROJECT;
 
 ----------------------------------------------------------------------------------------------------------------------
 
+CREATE TABLE WORKSON(
+EID NUMBER(5) REFERENCES EMPLOYEE(EID),
+PNO NUMBER(2)REFERENCES PROJECT(PNUM),
+HOURS NUMBER(5,2),
+PRIMARY KEY(EID,PNO));
+
+INSERT INTO WORKSON VALUES(1,1,4);
+INSERT INTO WORKSON VALUES(2,1,5);
+INSERT INTO WORKSON VALUES(3,2,4);
+INSERT INTO WORKSON VALUES(4,3,4);
+INSERT INTO WORKSON VALUES(5,5,4);
+
+SQL> SELECT * FROM WORKSON;
+
+       EID        PNO      HOURS
+---------- ---------- ----------
+         1          1          4
+         2          1          5
+         3          2          4
+         4          3          4
+         5          5          4
+-----------------------------------------------------------------------------------------------------------------------------------
+
+CREATE TABLE DEPENDENT(
+EMPID INT CONSTRAINT DEP_EMPID_PK PRIMARY KEY,
+DEP_NAME VARCHAR2(12),
+ GENDER VARCHAR2(5),
+BDATE DATE,
+RELATIONSHIP VARCHAR2(12), 
+FOREIGN KEY(EMPID)REFERENCES EMPLOYEE(EID) ON DELETE CASCADE);
+
+INSERT INTO DEPENDENT VALUES(1,'SHREYA','F','22-JAN-75','WIFE');
+INSERT INTO DEPENDENT VALUES(2,'AKASH','M','15-JUN-77','BROTHER');
+INSERT INTO DEPENDENT VALUES(3,'PRIYA','F','10-SEP-80','SISTER');
+INSERT INTO DEPENDENT VALUES(4,'NIKHIL','M','02-FEB-79','FATHER');
+INSERT INTO DEPENDENT VALUES(5,'AKSHA','F','30-OCT-75','MOTHER');
+
+SQL> SELECT * FROM DEPENDENT;
+
+     EMPID DEP_NAME     GENDE BDATE     RELATIONSHIP
+---------- ------------ ----- --------- ------------
+         1 SHREYA       F     22-JAN-75 WIFE
+         2 AKASH        M     15-JUN-77 BROTHER
+         3 PRIYA        F     10-SEP-80 SISTER
+         4 NIKHIL       M     02-FEB-79 FATHER
+         5 AKSHA        F     30-OCT-75 MOTHER
+
+----------------------------------------------------------------------------------------------------------------------------------------
+
 QUERY 1:-
 SELECT PNO FROM WORKSON WHERE EID IN
 (SELECT EID FROM EMPLOYEE WHERE NAME='RAHUL')
