@@ -13,6 +13,12 @@ INSERT INTO BRANCH VALUES('B5',' CANARA','MANGALURU',60000000);
 
 DESC BRANCH;
 
+ Name                                      Null?    Type
+ ----------------------------------------- -------- ----------------------------
+ BRANCH_ID                                 NOT NULL VARCHAR2(10)
+ BANK_NAME                                          VARCHAR2(15)
+ BRANCH_NAME                                        VARCHAR2(20)
+ ASSETS                                    NOT NULL NUMBER(38)
 ---------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE CUSTOMER(
@@ -28,6 +34,16 @@ INSERT INTO CUSTOMER VALUES('C2','RAVI',22,'MANGALURU',8745263);
 INSERT INTO CUSTOMER VALUES('C3','RAVI',22,'MANGALURU',8745263);
 INSERT INTO CUSTOMER VALUES('C4','RAVI',22,'MANGALURU',8745263);
 INSERT INTO CUSTOMER VALUES('C5','RAVI',22,'MANGALURU',8745263);
+
+DESC CUSTOMER;
+
+ Name                                                                                                              Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ CUSTOMER_ID                                                                                                       NOT NULL VARCHAR2(10)
+ CUSTOMER_NAME                                                                                                              VARCHAR2(20)
+ CUSTOMER_AGE                                                                                                               NUMBER(38)
+ CUSTOMER_ADDRESS                                                                                                           VARCHAR2(20)
+ CUSTOMER_PHONE                                                                                                             NUMBER(38)
 --------------------------------------------------------------------------------------------------------------------------------------
 
 
@@ -49,6 +65,17 @@ INSERT INTO ACCOUNT VALUES(1334,'B1','SAVINGS',10000,'C1');
 INSERT INTO ACCOUNT VALUES(1234,'B1','SAVINGS',10000,'C1');
 INSERT INTO ACCOUNT VALUES(5876,'B1','SAVINGS',10000,'C1');
 
+DESC ACCOUNT;
+
+ Name                                                                                                              Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ ACC_NO                                                                                                            NOT NULL NUMBER(38)
+ BRANCH_ID                                                                                                                  VARCHAR2(10)
+ ACCOUNT_TYPE                                                                                                               VARCHAR2(10)
+ ACCOUNT_BALANCE                                                                                                            NUMBER(38)
+ CUSTOMER_ID                                                                                                                VARCHAR2(10)
+
+
 --------------------------------------------------------------------------------------------------------------------------------------
 
 CREATE TABLE LOAN(
@@ -67,6 +94,17 @@ INSERT INTO LOAN VALUES('L3','B3',40000,'C3');
 INSERT INTO LOAN VALUES('L4','B2',565000,'C4');
 INSERT INTO LOAN VALUES('L5','B4',955000,'C5');
 INSERT INTO LOAN VALUES('L6','B5',20000,'C2');
+
+DESC LOAN;
+
+ Name                                                                                   Null?    Type
+ ---------------------------------------------------------------------------------------------------
+ LOAN_NUMBER                                                                            NOT NULL  VARCHAR2(5)
+ BRANCH_ID                                                                                        VARCHAR2(10)
+ AMOUNT                                                                                           NUMBER(38)
+ CUSTOMER_ID                                                                                      VARCHAR2(10)
+
+
 --------------------------------------------------------------------------------------------------------------------------------------
 
 QUERY 1:-
