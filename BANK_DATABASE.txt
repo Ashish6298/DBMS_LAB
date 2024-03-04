@@ -58,12 +58,24 @@ FOREIGN KEY (BRANCH_ID) REFERENCES BRANCH(BRANCH_ID) ON DELETE CASCADE,
 FOREIGN KEY(CUSTOMER_ID) REFERENCES CUSTOMER(CUSTOMER_ID) ON DELETE CASCADE );
 
 INSERT INTO ACCOUNT VALUES(123,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(456,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(789,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1122,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1334,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(1234,'B1','SAVINGS',10000,'C1');
-INSERT INTO ACCOUNT VALUES(5876,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(456,'B5','RECURRING',20000,'C2');
+INSERT INTO ACCOUNT VALUES(789,'B1','SAVINGS',30000,'C1');
+INSERT INTO ACCOUNT VALUES(1122,'B2','FD',5000,'C3');
+INSERT INTO ACCOUNT VALUES(1334,'B1','SAVINGS',10000,'C4');
+INSERT INTO ACCOUNT VALUES(1234,'B3','FD',90000,'C5');
+INSERT INTO ACCOUNT VALUES(5876,'B4','RECURRING',80000,'C3');
+
+SELECT * FROM ACCOUNT;
+
+    ACC_NO BRANCH_ID  ACCOUNT_TY ACCOUNT_BALANCE CUSTOMER_I
+---------- ---------- ---------- --------------- ----------
+       123 B1         SAVINGS              10000 C1
+       456 B5         RECURRING            20000 C2
+       789 B1         SAVINGS              30000 C1
+      1122 B2         FD                    5000 C3
+      1334 B1         SAVINGS              10000 C4
+      1234 B3         FD                   90000 C5
+      5876 B4         RECURRING            80000 C3
 
 DESC ACCOUNT;
 
@@ -74,7 +86,8 @@ DESC ACCOUNT;
  ACCOUNT_TYPE                                                                                                               VARCHAR2(10)
  ACCOUNT_BALANCE                                                                                                            NUMBER(38)
  CUSTOMER_ID                                                                                                                VARCHAR2(10)
-
+UNT VALUES(123,'B1','SAVINGS',10000,'C1');
+INSERT INTO ACCOUNT VALUES(456,'B1','SAVINGS'
 
 --------------------------------------------------------------------------------------------------------------------------------------
 
@@ -119,12 +132,8 @@ CUSTOMER_I CUSTOMER_NAME
 ---------- --------------------
 C1         RAVI
 C1         RAVI
-C1         RAVI
-C1         RAVI
-C1         RAVI
-C1         RAVI
-C1         RAVI
-
+C3         VARUN
+C4         ARPITHA
 -------------------------------------------------------------------------------------------------------------------------------------
 
 QUERY 2:- Find all the customers who have an account at all the branches located in a specific city.
